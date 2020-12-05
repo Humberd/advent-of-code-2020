@@ -1,5 +1,3 @@
-class Day04
-
 fun main() {
     val text = getResourceAsText("data/day04.txt")
     val rawBatches = text.split("\n\n").filter { it.length != 0 }
