@@ -17,3 +17,13 @@ fun Iterable<Int>.multiply(): Long {
     }
     return sum
 }
+
+
+fun Iterable<Boolean>.sum(): Int {
+    var sum = 0
+    for (element in this) {
+        sum += if (element) 1 else 0
+    }
+    return sum
+}
+
