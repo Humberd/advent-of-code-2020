@@ -8,3 +8,12 @@ fun printResult(result: Any) {
     println("==================")
     println("==================")
 }
+
+
+fun Iterable<Int>.multiply(): Long {
+    var sum = 1L
+    for (element in this) {
+        sum *= element
+    }
+    return sum
+}
