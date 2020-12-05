@@ -45,23 +45,18 @@ private fun getTreesCountPart2(grid: Array<Array<Boolean>>): Long {
 private fun countTreesFor(grid: Array<Array<Boolean>>, verticalJump: Int, horizontalJump: Int): Int {
     var resultCount = 0
 
-    var maxRowIndex= 0;
-
-    for (rowIndex in 0..grid.size - 1 step verticalJump) {
+    for (rowIndex in verticalJump..grid.size - 1 step verticalJump) {
         val row = grid[rowIndex]
-        resultCount += if (rowHasTree(row, rowIndex, horizontalJump)) 1 else 0
-
-        maxRowIndex = rowIndex
-    }
-    if (maxRowIndex != grid.size-1) {
-        throw Error("Not reached last index")
+        val iteration = rowIndex / verticalJump
+        val hasTree = rowHasTree(row, iteration, horizontalJump);
+        resultCount += if (hasTree) 1 else 0
     }
 
     return resultCount
 }
 
-private fun rowHasTree(row: Array<Boolean>, rowIndex: Int, horizontalJump: Int): Boolean {
-    val index = (rowIndex * horizontalJump) % row.size
+private fun rowHasTree(row: Array<Boolean>, iteration: Int, horizontalJump: Int): Boolean {
+    val index = (iteration * horizontalJump) % row.size
 
     return row[index]
 }
