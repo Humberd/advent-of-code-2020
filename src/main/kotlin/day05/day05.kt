@@ -10,8 +10,11 @@ fun main() {
     part2(lines)
 }
 
+// 590
 private fun part2(lines: List<String>) {
-    val maxId = lines.map { line ->
+    val grid = Array(128, { 0 })
+
+    lines.forEach { line ->
         val rawRow = line.take(7).reversed()
         val rawColumn = line.takeLast(3).reversed()
 
@@ -29,12 +32,15 @@ private fun part2(lines: List<String>) {
             }
         }
 
-        val seatId = (rowValue * 8) + columnValue
-        println("$line: row $rowValue, column $columnValue, seat ID $seatId")
-        seatId
-    }.maxOrNull()
+        grid[rowValue] = grid[rowValue] or (1 shl columnValue)
+    }
 
-    printResult("Max Id is $maxId")
+    for (index in 0..grid.size - 1) {
+        val element = grid[index]
+        if (element != 0 && element.toDouble() != Math.pow(2.0, 8.0) - 1) {
+            println("$index: ${Integer.toBinaryString(element)}")
+        }
+    }
 }
 
 private fun part1(lines: List<String>) {
